@@ -1,0 +1,63 @@
+#include<iostream>
+using namespace std;
+class node{
+	public:
+	int data;
+	node*next;
+	node(int d){
+		data=d;
+		next=NULL;
+	}
+};
+void insertatfront(node*&head,node*&tail,int d){
+	node*p=new node(d);
+	if(head==NULL){
+		head=p;
+		tail=p;
+	}
+	else{
+		p->next=head;
+		head=p;
+	}
+}
+void insertattail(node*&head,node*&tail,int d){
+	node*temp=new node(d);
+	if(head==NULL){
+		head=temp;
+		tail=temp;
+	}
+	else{
+		tail->next=temp;
+		tail=temp;
+	}
+}
+
+void printll(node*head){
+	node*temp=head;
+	while(temp!=NULL){
+		cout<<temp->data<<" ";
+		temp=temp->next;
+	}
+	cout<<endl;
+}
+
+int midlell(node*head){
+	node*p1=head;
+	node*p2=head->next;
+	while(p2!=NULL && p2->next!=NULL){
+		p1=p1->next;
+		p2=p2->next->next;
+	}
+	return p1->data;
+}
+int main(){
+	node*head=NULL;
+	node*tail=NULL;
+	insertattail(head,tail,2);
+	insertattail(head,tail,3);
+	insertattail(head,tail,9);
+	insertattail(head,tail,6);
+	insertattail(head,tail,18);
+		printll(head);
+		cout<<"mid point is "<<midlell(head)<<endl;
+}
