@@ -1,0 +1,79 @@
+#include<iostream>
+using namespace std;
+class node{
+	public:
+	int data;
+	node*next;
+	node(int d){
+		data=d;
+		next=NULL;
+	}
+};
+void insertattail(node*&head,node*&tail,int d){
+	node*x=new node(d);
+	if(head==NULL){
+		head=x;
+		tail=x;
+	}
+	else{
+		tail->next=x;
+		tail=x;
+	}
+}
+node*mergetwosortedll(node*head1,node*head2){
+	if(head1==NULL){
+		return head2;
+	}
+	if(head2==NULL){
+		return head1;
+	}
+	else if(head1->data<head2->data){
+		node*newhead=NULL;
+		newhead=head1;
+		newhead->next=mergetwosortedll(head1->next,head2);
+		return newhead;
+	}
+	else{
+		node*newhead=NULL;
+		newhead=head2;
+		newhead->next=mergetwosortedll(head1,head2->next);
+		return newhead;
+	}
+}
+void printll(node*newhead){
+	node*temp=newhead;
+	while(temp!=NULL){
+		cout<<temp->data<<" ";
+		temp=temp->next;
+	}
+}
+int main(){
+	node*head1=NULL;
+	node*tail1=NULL;
+	int n;
+	cin>>n;
+	for(int i=0;i<n;i++){
+		int data;
+		cin>>data;
+		insertattail(head1,tail1,data);
+	}
+	node*head2=NULL;
+	node*tail2=NULL;
+	int m;
+		cin>>m;
+	for(int j=0;j<m;j++){
+int d;
+cin>>d;
+		insertattail(head2,tail2,d);
+	}
+	node*newhead=mergetwosortedll(head1,head2);
+	printll(newhead);
+	
+	
+	
+	
+	
+	
+	
+	
+}
