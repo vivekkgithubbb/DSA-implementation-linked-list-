@@ -1,1 +1,57 @@
-
+#include<iostream>
+using namespace std;
+class node{
+	public:
+	int data;
+	node*next;
+	node(int d){
+		data=d;
+		next=NULL;
+	}
+};
+void insertattail(node*&head,node*&tail,int d){
+	if(head==NULL){
+		node*p=new node(d);
+		head=p;
+		tail=p;
+	}
+	else{
+		node*p=new node(d);
+		tail->next=p;
+		tail=p;
+	}
+}
+void deleteatfornt(node*&head,node*&tail){
+	if(head==NULL){
+		return;
+	}
+	else if(head->next==NULL){
+		delete head;
+		head=NULL;
+	}
+	else{
+		node*temp=head->next;
+		delete head;
+		head=temp;
+		tail=NULL;
+	}
+}
+void printll(node*head){
+	node*temp=head;
+	while(temp!=NULL){
+		cout<<temp->data<<" ";
+		temp=temp->next;
+	}
+	cout<<endl;
+}
+int main(){
+	node*head=NULL;
+	node*tail=NULL;
+	insertattail(head,tail,2);
+	insertattail(head,tail,3);
+	insertattail(head,tail,9);
+	insertattail(head,tail,6);
+	insertattail(head,tail,18);
+    deleteatfornt(head,tail);
+	printll(head);
+}
