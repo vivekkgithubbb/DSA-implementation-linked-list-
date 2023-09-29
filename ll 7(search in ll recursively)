@@ -1,0 +1,61 @@
+#include<iostream>
+using namespace std;
+class node{
+	public:
+	int data;
+	node*next;
+	node(int d){
+		data=d;
+		next=NULL;
+	}
+};
+void insertatfront(node*&head,node*&tail,int d){
+	node*p=new node(d);
+	if(head==NULL){
+		head=p;
+		tail=p;
+	}
+	else{
+		p->next=head;
+		head=p;
+	}
+}
+void insertattail(node*&head,node*&tail,int d){
+	node*temp=new node(d);
+	if(head==NULL){
+		head=temp;
+		tail=temp;
+	}
+	else{
+		tail->next=temp;
+		tail=temp;
+	}
+}
+bool searchinllrec(node*head,int key){
+	if(head==NULL){//base case
+		return false;
+	}
+	//rec case
+	if(head->data==key){
+		return true;
+	}
+	return searchinllrec(head->next,key);
+}
+int main(){
+	node*head=NULL;
+	node*tail=NULL;
+	insertattail(head,tail,2);
+	insertattail(head,tail,3);
+	insertattail(head,tail,9);
+	insertattail(head,tail,6);
+	insertattail(head,tail,18);
+		printll(head);
+		int key;
+		cin>>key;
+		if(searchinllrec(head,key)==true){
+			cout<<"key is present"<<endl;
+		}
+		else{
+			cout<<"key is not present"<<endl;
+		}
+}
