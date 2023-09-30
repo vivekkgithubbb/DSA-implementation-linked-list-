@@ -30,6 +30,7 @@ bool checkcycle(node*head){
 			return true;
 		}
 	}
+        return false;
 }
 node*createcycle(node*head,int pos){
 	node*temp=head;
