@@ -1,0 +1,76 @@
+#include<iostream>
+using namespace std;
+class node{
+	public:
+	int data;
+	node*next;
+	node(int d){
+		data=d;
+		next=NULL;
+	}
+};
+void insertattail(node*&head,node*&tail,int d){
+	node*p=new node(d);
+	if(head==NULL){
+		head=p;
+		tail=p;
+	}
+	else{
+		tail->next=p;
+		tail=p;
+	}
+}
+node*reverseall(node*head){
+	node*prev=NULL;
+	node*curr=head;
+	while(curr!=NULL){
+		node*ne=curr->next;
+		curr->next=prev;
+		prev=curr;
+		curr=ne;
+	}
+	return prev;
+}
+node* kreverse(node* head, int k) {
+    if (head == NULL) {
+        return head;
+    }
+    node* temp = head;
+    for (int jump = 1; jump <= k - 1; jump++) {
+        temp = temp->next;
+    }
+    node* ptr = temp->next;
+    temp->next = NULL;
+    node* nhead = reverseall(head);
+    node* t = nhead;
+    while (t->next != NULL) {
+        t = t->next;
+    }
+    t->next = kreverse(ptr, k);
+    return nhead;
+}
+void printll(node*head){
+	node*temp=head;
+	while(temp!=NULL){
+		cout<<temp->data<<" ";
+		temp=temp->next;
+	}
+}
+
+int main(){
+	node*head=NULL;
+	node*tail=NULL;
+	int n;
+	cin>>n;
+	for(int i=0;i<n;i++){
+		int data;
+		cin>>data;
+		insertattail(head,tail,data);
+	}
+	//cout<<"after reversing the ll"<<endl;
+  // node*head1=reverseall(head);
+int k;
+cin>>k;
+  node*nhead=kreverse(head,k);
+   printll(nhead);
+}
